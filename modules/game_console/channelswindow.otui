@@ -1,0 +1,87 @@
+ChannelListLabel < Label
+  font: verdana-11px-monochrome
+  background-color: alpha
+  text-offset: 2 0
+  focusable: true
+
+  $focus:
+    background-color: #ffffff22
+    color: #ffffff
+
+MainWindow
+  id: channelsWindow
+  !text: tr('Open Channel')
+  size: 250 285
+  @onEscape: self:destroy()
+
+  Label
+    id: channelsWindowDescription
+    !text: tr('Select a channel: ')
+    anchors.left: parent.left
+    anchors.bottom: next.top
+    margin-bottom: 5
+
+  TextList
+    id: channelList
+    vertical-scrollbar: channelsScrollBar
+    anchors.fill: parent
+    anchors.bottom: next.top
+    margin-bottom: 10
+    margin-top: 10
+    padding: 1
+    focusable: false
+
+  Label
+    id: openPrivateChannelWithLabel
+    !text: tr('Open a private message channel') .. ':'
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: next.top
+    text-align: left
+    margin-bottom: 2
+    margin-top: 5
+
+  TextEdit
+    id: openPrivateChannelWith
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: next.top
+    margin-bottom: 10
+    margin-top: 5
+
+  HorizontalSeparator
+    id: separator
+    anchors.left: parent.left
+    anchors.right: parent.right
+    anchors.bottom: next.top
+    margin-bottom: 5
+
+  Button
+    id: buttonOpen
+    !text: tr('Open')
+    width: 48
+    text-resize: -222
+    text-align: center
+    text-wrap: true
+    anchors.right: next.left
+    anchors.bottom: parent.bottom
+    margin-right: 10
+    @onClick: self:getParent():onEnter()
+
+  Button
+    id: buttonCancel
+    !text: tr('Cancel')
+    width: 48
+    text-auto-resize: true
+    text-align: center
+    text-wrap: true
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    @onClick: self:getParent():destroy()
+
+  VerticalScrollBar
+    id: channelsScrollBar
+    anchors.top: channelList.top
+    anchors.bottom: channelList.bottom
+    anchors.right: channelList.right
+    pixels-scroll: false
